@@ -3,15 +3,8 @@ import {
   Pie,
   Cell,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
-
-const data = [
-  { name: "Biodegradable", value: 45 },
-  { name: "Non-Biodegradable", value: 35 },
-  { name: "E-Waste", value: 20 },
-];
 
 const COLORS = [
   "#22c55e",
@@ -19,37 +12,37 @@ const COLORS = [
   "#3b82f6",
 ];
 
-export default function PieChartCard() {
+export default function PieChartCard({ data }) {
+
+  if (!data || data.length === 0) {
+    return (
+      <div className="h-full flex items-center justify-center text-slate-500">
+        No prediction available
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6 h-[350px]">
+    <ResponsiveContainer width="100%" height={300}>
+      <PieChart>
 
-      <h2 className="text-white text-xl font-semibold mb-5">
-        Waste Distribution
-      </h2>
+        <Pie
+          data={data}
+          dataKey="value"
+          nameKey="name"
+          outerRadius={100}
+        >
+          {data.map((entry, index) => (
+            <Cell
+              key={index}
+              fill={COLORS[index % COLORS.length]}
+            />
+          ))}
+        </Pie>
 
-      <ResponsiveContainer width="100%" height="90%">
-        <PieChart>
+        <Tooltip />
 
-          <Pie
-            data={data}
-            dataKey="value"
-            outerRadius={110}
-            label
-          >
-            {data.map((entry, index) => (
-              <Cell
-                key={index}
-                fill={COLORS[index]}
-              />
-            ))}
-          </Pie>
-
-          <Tooltip />
-          <Legend />
-
-        </PieChart>
-      </ResponsiveContainer>
-
-    </div>
+      </PieChart>
+    </ResponsiveContainer>
   );
 }

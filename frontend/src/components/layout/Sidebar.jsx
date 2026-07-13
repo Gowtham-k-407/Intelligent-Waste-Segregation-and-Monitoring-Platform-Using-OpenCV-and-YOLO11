@@ -12,17 +12,7 @@ const Sidebar = () => {
       name: "Dashboard",
       icon: <LayoutDashboard size={20} />,
       path: "/",
-    },
-    {
-      name: "Upload",
-      icon: <Upload size={20} />,
-      path: "/upload",
-    },
-    {
-      name: "Live Detection",
-      icon: <Camera size={20} />,
-      path: "/live",
-    },
+    }
   ];
 
   return (

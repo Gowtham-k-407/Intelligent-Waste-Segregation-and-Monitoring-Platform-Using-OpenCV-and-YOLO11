@@ -8,43 +8,35 @@ import {
   Bar,
 } from "recharts";
 
-const data = [
-  { name: "Plastic", count: 15 },
-  { name: "Paper", count: 10 },
-  { name: "Food", count: 8 },
-  { name: "Metal", count: 6 },
-  { name: "Glass", count: 4 },
-];
+export default function BarChartCard({ data }) {
 
-export default function BarChartCard() {
+  if (!data || data.length === 0) {
+    return (
+      <div className="h-[300px] flex items-center justify-center text-slate-500">
+        No prediction available
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6 h-[350px]">
+    <ResponsiveContainer width="100%" height={300}>
+      <BarChart data={data}>
 
-      <h2 className="text-white text-xl font-semibold mb-5">
-        Waste Count
-      </h2>
+        <CartesianGrid strokeDasharray="3 3" />
 
-      <ResponsiveContainer width="100%" height="90%">
+        <XAxis dataKey="name" />
 
-        <BarChart data={data}>
+        <YAxis />
 
-          <CartesianGrid strokeDasharray="3 3" />
+        <Tooltip />
 
-          <XAxis dataKey="name" />
+        <Bar
+          dataKey="count"
+          fill="#22c55e"
+          radius={[8, 8, 0, 0]}
+        />
 
-          <YAxis />
-
-          <Tooltip />
-
-          <Bar
-            dataKey="count"
-            fill="#22c55e"
-          />
-
-        </BarChart>
-
-      </ResponsiveContainer>
-
-    </div>
+      </BarChart>
+    </ResponsiveContainer>
   );
 }
